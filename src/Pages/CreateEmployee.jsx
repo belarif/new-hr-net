@@ -1,5 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  DatePicker,
+  Select,
+  ConfigProvider,
+} from "antd";
 
 const CreateEmployee = () => {
   return (
@@ -10,7 +19,8 @@ const CreateEmployee = () => {
       <div className="container">
         <Link to="/employee-list">View Current Employees</Link>
         <h2>Create Employee</h2>
-        <form action="#" id="create-employee">
+
+        {/* <form action="#" id="create-employee">
           <label for="first-name">First Name</label>
           <input type="text" id="first-name" />
 
@@ -47,9 +57,80 @@ const CreateEmployee = () => {
             <option>Human Resources</option>
             <option>Legal</option>
           </select>
-        </form>
+        </form> */}
 
-        <button onclick="saveEmployee()">Save</button>
+        <Form
+          layout="vertical"
+          style={{ width: "40%", background: "#f5f6f7", padding: "30px" }}
+        >
+          <Form.Item label="First name">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Last name">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Date of birth">
+            <DatePicker format="DD/MM/YYYY" />
+          </Form.Item>
+          <Form.Item label="Start date">
+            <DatePicker format="DD/MM/YYYY" />
+          </Form.Item>
+          <fieldset>
+            <legend style={{ borderBottom: "0", width: "auto" }}>
+              Address
+            </legend>
+            <Form.Item label="Street">
+              <Input />
+            </Form.Item>
+            <Form.Item label="City">
+              <Input />
+            </Form.Item>
+            <Form.Item label="State">
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorBgContainer: "#e6ebf0",
+                  },
+                }}
+              >
+                <Select />
+              </ConfigProvider>
+            </Form.Item>
+            <Form.Item label="Zip Code">
+              <InputNumber />
+            </Form.Item>
+            <Form.Item label="Department">
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorBgContainer: "#e6ebf0",
+                  },
+                }}
+              >
+                <Select defaultValue="Sales">
+                  <Select.Option>Sales</Select.Option>
+                  <Select.Option>Marketing</Select.Option>
+                  <Select.Option>Engineering</Select.Option>
+                  <Select.Option>Human Resources</Select.Option>
+                  <Select.Option>Legal</Select.Option>
+                </Select>
+              </ConfigProvider>
+            </Form.Item>
+            <Form.Item style={{ textAlign: "center" }}>
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorBgContainer: "#e6ebf0",
+                  },
+                }}
+              >
+                <Button>Save</Button>
+              </ConfigProvider>
+            </Form.Item>
+          </fieldset>
+        </Form>
+
+        {/* <button onclick="saveEmployee()">Save</button> */}
       </div>
       <div id="confirmation" className="modal">
         Employee Created!
