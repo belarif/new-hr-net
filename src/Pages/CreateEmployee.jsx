@@ -9,8 +9,20 @@ import {
   Select,
   ConfigProvider,
 } from "antd";
+import { standardizeDataStatesSelectField } from "../data/states";
+import { useState, useEffect } from "react";
 
 const CreateEmployee = () => {
+  const [selectStates, setSelectStates] = useState([]);
+
+  useEffect(() => {
+    setSelectStates(standardizeDataStatesSelectField);
+  }, []);
+
+  if (!selectStates) {
+    return <div></div>;
+  }
+
   return (
     <React.Fragment>
       <div className="title">
@@ -19,46 +31,6 @@ const CreateEmployee = () => {
       <div className="container">
         <Link to="/employee-list">View Current Employees</Link>
         <h2>Create Employee</h2>
-
-        {/* <form action="#" id="create-employee">
-          <label for="first-name">First Name</label>
-          <input type="text" id="first-name" />
-
-          <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" />
-
-          <label for="date-of-birth">Date of Birth</label>
-          <input id="date-of-birth" type="text" />
-
-          <label for="start-date">Start Date</label>
-          <input id="start-date" type="text" />
-
-          <fieldset className="address">
-            <legend>Address</legend>
-
-            <label for="street">Street</label>
-            <input id="street" type="text" />
-
-            <label for="city">City</label>
-            <input id="city" type="text" />
-
-            <label for="state">State</label>
-            <select name="state" id="state"></select>
-
-            <label for="zip-code">Zip Code</label>
-            <input id="zip-code" type="number" />
-          </fieldset>
-
-          <label for="department">Department</label>
-          <select name="department" id="department">
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Engineering</option>
-            <option>Human Resources</option>
-            <option>Legal</option>
-          </select>
-        </form> */}
-
         <Form
           layout="vertical"
           style={{ width: "40%", background: "#f5f6f7", padding: "30px" }}
@@ -93,7 +65,10 @@ const CreateEmployee = () => {
                   },
                 }}
               >
-                <Select />
+                <Select
+                  defaultValue={selectStates[0] && selectStates[0].label}
+                  options={selectStates && selectStates}
+                />
               </ConfigProvider>
             </Form.Item>
             <Form.Item label="Zip Code">
@@ -108,11 +83,13 @@ const CreateEmployee = () => {
                 }}
               >
                 <Select defaultValue="Sales">
-                  <Select.Option>Sales</Select.Option>
-                  <Select.Option>Marketing</Select.Option>
-                  <Select.Option>Engineering</Select.Option>
-                  <Select.Option>Human Resources</Select.Option>
-                  <Select.Option>Legal</Select.Option>
+                  <Select.Option value="sales">Sales</Select.Option>
+                  <Select.Option value="marketing">Marketing</Select.Option>
+                  <Select.Option value="engineering">Engineering</Select.Option>
+                  <Select.Option value="human Resources">
+                    Human Resources
+                  </Select.Option>
+                  <Select.Option value="legal">Legal</Select.Option>
                 </Select>
               </ConfigProvider>
             </Form.Item>
