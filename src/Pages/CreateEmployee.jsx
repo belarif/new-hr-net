@@ -9,7 +9,7 @@ import {
   Select,
   ConfigProvider,
 } from "antd";
-import { standardizeDataStatesSelectField } from "../data/states";
+import { standardizeDataStatesSelectField } from "../mappers/statesData";
 import { useState, useEffect } from "react";
 
 const CreateEmployee = () => {

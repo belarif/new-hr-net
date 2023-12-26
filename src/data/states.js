@@ -236,11 +236,3 @@ export const states = [
     abbreviation: "WY",
   },
 ];
-
-export const standardizeDataStatesSelectField = () => {
-  return states.map((state) => ({
-    ...state,
-    label: state.name,
-    value: state.abbreviation,
-  }));
-};
