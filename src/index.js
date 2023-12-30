@@ -5,6 +5,9 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import CreateEmployee from "./Pages/CreateEmployee";
 import EmployeeList from "./Pages/EmployeeList";
 import Error from "./Pages/Error";
@@ -31,7 +34,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
