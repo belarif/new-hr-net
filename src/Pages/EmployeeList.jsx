@@ -78,7 +78,7 @@ const EmployeeList = () => {
 
   return (
     <React.Fragment>
-      <div id="employee-div" class="container">
+      <div id="employee-div" className="container">
         <h1>Current Employees</h1>
         <Table columns={columns} dataSource={data}></Table>
         <Link to="/home">Home</Link>

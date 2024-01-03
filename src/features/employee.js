@@ -12,7 +12,7 @@ const initialState = {
   department: null,
 };
 
-const { actions, reducer } = createSlice({
+const employeeSlice = createSlice({
   name: "employee",
   initialState,
   reducers: {
@@ -23,8 +23,20 @@ const { actions, reducer } = createSlice({
       reducer: (state, action) => {
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
-        state.dateOfBirth = action.payload.dateOfBirth;
-        state.startDate = action.payload.startDate;
+        state.dateOfBirth =
+          action.payload.dateOfBirth.$d.getDate() +
+          "-" +
+          action.payload.dateOfBirth.$d.getMonth() +
+          1 +
+          "-" +
+          action.payload.dateOfBirth.$d.getFullYear();
+        state.startDate =
+          action.payload.startDate.$d.getDate() +
+          "-" +
+          action.payload.startDate.$d.getMonth() +
+          1 +
+          "-" +
+          action.payload.startDate.$d.getFullYear();
         state.street = action.payload.street;
         state.state = action.payload.state;
         state.city = action.payload.city;
@@ -38,9 +50,10 @@ const { actions, reducer } = createSlice({
 export function createEmployee(employeeData) {
   return async (dispatch) => {
     if (employeeData) {
-      dispatch(actions.submitting(employeeData));
+      dispatch(submitting(employeeData));
     }
   };
 }
 
-export default reducer;
+export const { submitting } = employeeSlice.actions;
+export default employeeSlice.reducer;
