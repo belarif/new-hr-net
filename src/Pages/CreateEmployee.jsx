@@ -18,8 +18,8 @@ const CreateEmployee = () => {
     return <div></div>;
   }
 
-  const onFinish = (employeeData) => {
-    dispatch(createEmployee(employeeData));
+  const onFinish = (formData) => {
+    dispatch(createEmployee(formData));
   };
 
   return (

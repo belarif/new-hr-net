@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
+import { useSelector } from "react-redux";
+import { selectEmployeesData } from "../selectors/selectors";
 
 const EmployeeList = () => {
   const columns = [
@@ -51,36 +53,14 @@ const EmployeeList = () => {
     },
   ];
 
-  const data = [
-    {
-      firstName: "hocine",
-      lastName: "belarif",
-      startDate: "12/09/2023",
-      department: "marketing",
-      dateOfBirth: "12/09/1998",
-      street: "rue de la paix",
-      city: "hawaii",
-      state: "HI",
-      zipCode: 12023,
-    },
-    {
-      firstName: "alex",
-      lastName: "faucoult",
-      startDate: "15/09/2013",
-      department: "sales",
-      dateOfBirth: "17/01/1976",
-      street: "rue de la paroisse",
-      city: "chicago",
-      state: "CH",
-      zipCode: 78023,
-    },
-  ];
+  const employeesData = useSelector(selectEmployeesData);
+  const employeesList = employeesData["employees"];
 
   return (
     <React.Fragment>
       <div id="employee-div" className="container">
         <h1>Current Employees</h1>
-        <Table columns={columns} dataSource={data}></Table>
+        <Table columns={columns} dataSource={employeesList}></Table>
         <Link to="/home">Home</Link>
       </div>
     </React.Fragment>
