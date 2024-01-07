@@ -8,6 +8,7 @@ import { createEmployee } from "../features/employee";
 
 const CreateEmployee = () => {
   const [selectStates, setSelectStates] = useState([]);
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const CreateEmployee = () => {
       startDate: formData["startDate"].format("DD/MM/YYYY"),
     };
 
-    dispatch(createEmployee(values));
+    dispatch(createEmployee(values, form));
   };
 
   return (
@@ -40,6 +41,7 @@ const CreateEmployee = () => {
           layout="vertical"
           style={{ width: "40%", background: "#f5f6f7", padding: "30px" }}
           onFinish={onFinish}
+          form={form}
         >
           <Form.Item
             label="First name"

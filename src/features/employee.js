@@ -33,11 +33,12 @@ const employeeSlice = createSlice({
   },
 });
 
-export function createEmployee(values) {
+export function createEmployee(values, form) {
   return async (dispatch) => {
     if (values) {
       dispatch(submitting(values));
       dispatch(addEmployee(values));
+      form.resetFields();
     }
   };
 }
