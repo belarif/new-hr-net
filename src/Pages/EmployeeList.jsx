@@ -56,10 +56,6 @@ const EmployeeList = () => {
   const employeesData = useSelector(selectEmployeesData);
   const employeesList = employeesData["employees"];
 
-  if (!employeesList) {
-    return <div></div>;
-  }
-
   return (
     <React.Fragment>
       <div id="employee-div" className="container">

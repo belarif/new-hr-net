@@ -2,12 +2,21 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, DatePicker, Select, ConfigProvider } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  Select,
+  ConfigProvider,
+  Modal,
+} from "antd";
 import { standardizeDataStatesSelectField } from "../mappers/statesData";
 import { createEmployee } from "../features/employee";
 
 const CreateEmployee = () => {
   const [selectStates, setSelectStates] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -15,9 +24,13 @@ const CreateEmployee = () => {
     setSelectStates(standardizeDataStatesSelectField);
   }, []);
 
-  if (!selectStates) {
-    return <div></div>;
-  }
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const onFinish = (formData) => {
     const values = {
@@ -27,6 +40,7 @@ const CreateEmployee = () => {
     };
 
     dispatch(createEmployee(values, form));
+    showModal();
   };
 
   return (
@@ -177,9 +191,9 @@ const CreateEmployee = () => {
           </fieldset>
         </Form>
       </div>
-      {/* <div id="confirmation" className="modal">
-        Employee Created!
-      </div> */}
+      <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
+        <p>Employee Created!</p>
+      </Modal>
     </React.Fragment>
   );
 };
