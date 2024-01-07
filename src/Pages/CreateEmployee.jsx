@@ -19,7 +19,13 @@ const CreateEmployee = () => {
   }
 
   const onFinish = (formData) => {
-    dispatch(createEmployee(formData));
+    const values = {
+      ...formData,
+      dateOfBirth: formData["dateOfBirth"].format("DD/MM/YYYY"),
+      startDate: formData["startDate"].format("DD/MM/YYYY"),
+    };
+
+    dispatch(createEmployee(values));
   };
 
   return (

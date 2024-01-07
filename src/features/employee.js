@@ -22,20 +22,8 @@ const employeeSlice = createSlice({
     submitting: (state, action) => {
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
-      state.dateOfBirth =
-        action.payload.dateOfBirth.$d.getDate() +
-        "-" +
-        action.payload.dateOfBirth.$d.getMonth() +
-        1 +
-        "-" +
-        action.payload.dateOfBirth.$d.getFullYear();
-      state.startDate =
-        action.payload.startDate.$d.getDate() +
-        "-" +
-        action.payload.startDate.$d.getMonth() +
-        1 +
-        "-" +
-        action.payload.startDate.$d.getFullYear();
+      state.dateOfBirth = action.payload.dateOfBirth.$d;
+      state.startDate = action.payload.startDate.$d;
       state.street = action.payload.street;
       state.state = action.payload.state;
       state.city = action.payload.city;
@@ -45,11 +33,11 @@ const employeeSlice = createSlice({
   },
 });
 
-export function createEmployee(formData) {
+export function createEmployee(values) {
   return async (dispatch) => {
-    if (formData) {
-      dispatch(submitting(formData));
-      dispatch(addEmployee(formData));
+    if (values) {
+      dispatch(submitting(values));
+      dispatch(addEmployee(values));
     }
   };
 }

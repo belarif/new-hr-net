@@ -14,5 +14,13 @@ const employeesSlice = createSlice({
   },
 });
 
+export function addEmployeeToEmployees(employee) {
+  return async (dispatch) => {
+    if (employee) {
+      dispatch(addEmployee(employee));
+    }
+  };
+}
+
 export const { addEmployee } = employeesSlice.actions;
 export default employeesSlice.reducer;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Table } from "antd";
 import { useSelector } from "react-redux";
+import { Table } from "antd";
 import { selectEmployeesData } from "../selectors/selectors";
 
 const EmployeeList = () => {
@@ -56,11 +56,17 @@ const EmployeeList = () => {
   const employeesData = useSelector(selectEmployeesData);
   const employeesList = employeesData["employees"];
 
+  if (!employeesList) {
+    return <div></div>;
+  }
+
   return (
     <React.Fragment>
       <div id="employee-div" className="container">
         <h1>Current Employees</h1>
-        <Table columns={columns} dataSource={employeesList}></Table>
+        {employeesList && (
+          <Table columns={columns} dataSource={employeesList}></Table>
+        )}
         <Link to="/home">Home</Link>
       </div>
     </React.Fragment>
