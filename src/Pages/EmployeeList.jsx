@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Table, Input, Form } from "antd";
+import { Table, Input, Select, Form } from "antd";
 import { selectEmployeesData } from "../selectors/selectors";
 
 const EmployeeList = () => {
-  const [SearchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const employeesData = useSelector(selectEmployeesData);
   let employeesList = employeesData["employees"];
 
@@ -122,14 +122,37 @@ const EmployeeList = () => {
     },
   ];
 
+  const employeesNumber = [
+    {
+      key: 1,
+      value: 10,
+      label: 10,
+    },
+    {
+      key: 2,
+      value: 25,
+      label: 25,
+    },
+    {
+      key: 3,
+      value: 50,
+      label: 50,
+    },
+    {
+      key: 4,
+      value: 100,
+      label: 100,
+    },
+  ];
+
   const filterData = () => {
-    if (SearchInput === "") {
+    if (searchInput === "") {
       return employeesList;
     }
 
     employeesList = employeesList.filter((employee) => {
       const r = columns.find((column) =>
-        employee[column.dataIndex].includes(SearchInput)
+        employee[column.dataIndex].includes(searchInput)
       );
 
       return r ? r : false;
@@ -142,7 +165,15 @@ const EmployeeList = () => {
       <div id="employee-div" className="container">
         <h1 style={{ textAlign: "center" }}>Current Employees</h1>
         <div>
-          <Form style={{ display: "flex", justifyContent: "end" }}>
+          <Form
+            initialValues={{
+              employeeNumber: employeesNumber[0].label,
+            }}
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Form.Item label="Show" name="employeeNumber">
+              <Select options={employeesNumber}></Select>
+            </Form.Item>
             <Form.Item label="Search:">
               <Input.Search size="small" onSearch={setSearchInput} allowClear />
             </Form.Item>

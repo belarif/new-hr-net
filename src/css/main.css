@@ -5,8 +5,9 @@
   width: 1024px;
 }
 
-.title {
+.content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

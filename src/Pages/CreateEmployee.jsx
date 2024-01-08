@@ -11,7 +11,7 @@ import {
   ConfigProvider,
   Modal,
 } from "antd";
-import { standardizeDataStatesSelectField } from "../mappers/statesData";
+import { standardizeDataStatesSelectField } from "../mappers/data";
 import { createEmployee } from "../features/employee";
 
 const CreateEmployee = () => {
@@ -45,151 +45,155 @@ const CreateEmployee = () => {
 
   return (
     <React.Fragment>
-      <div className="title">
-        <h1>HRnet</h1>
-      </div>
       <div className="container">
-        <Link to="/employee-list">View Current Employees</Link>
-        <h2>Create Employee</h2>
-        <Form
-          layout="vertical"
-          style={{ width: "40%", background: "#f5f6f7", padding: "30px" }}
-          onFinish={onFinish}
-          form={form}
-        >
-          <Form.Item
-            label="First name"
-            name="firstName"
-            rules={[
-              {
-                required: true,
-                message: "Enter your first name",
-              },
-            ]}
+        <div className="content">
+          <h1>HRnet</h1>
+          <Link to="/employee-list">View Current Employees</Link>
+          <h2>Create Employee</h2>
+          <Form
+            layout="vertical"
+            style={{ width: "40%", background: "#f5f6f7", padding: "30px" }}
+            onFinish={onFinish}
+            form={form}
+            initialValues={{
+              state: "Alabama",
+              department: "Sales",
+            }}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Last name"
-            name="lastName"
-            rules={[
-              {
-                required: true,
-                message: "Enter your last name",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Date of birth"
-            name="dateOfBirth"
-            rules={[
-              {
-                required: true,
-                message: "Enter your date of birth",
-              },
-            ]}
-          >
-            <DatePicker format="DD/MM/YYYY" />
-          </Form.Item>
-          <Form.Item
-            label="Start date"
-            name="startDate"
-            rules={[
-              {
-                required: true,
-                message: "Enter your start date",
-              },
-            ]}
-          >
-            <DatePicker format="DD/MM/YYYY" />
-          </Form.Item>
-          <fieldset>
-            <legend style={{ borderBottom: "0", width: "auto" }}>
-              Address
-            </legend>
             <Form.Item
-              label="Street"
-              name="street"
+              label="First name"
+              name="firstName"
               rules={[
                 {
                   required: true,
-                  message: "Enter the street",
+                  message: "Enter your first name",
                 },
               ]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="City"
-              name="city"
+              label="Last name"
+              name="lastName"
               rules={[
                 {
                   required: true,
-                  message: "Enter the city",
+                  message: "Enter your last name",
                 },
               ]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="State"
-              name="state"
+              label="Date of birth"
+              name="dateOfBirth"
               rules={[
                 {
                   required: true,
-                  message: "Enter the state",
+                  message: "Enter your date of birth",
                 },
               ]}
             >
-              <Select options={selectStates && selectStates} />
+              <DatePicker format="DD/MM/YYYY" />
             </Form.Item>
             <Form.Item
-              label="Zip Code"
-              name="zipCode"
+              label="Start date"
+              name="startDate"
               rules={[
                 {
                   required: true,
-                  message: "Enter zip code",
+                  message: "Enter your start date",
                 },
               ]}
             >
-              <Input />
+              <DatePicker format="DD/MM/YYYY" />
             </Form.Item>
-            <Form.Item
-              label="Department"
-              name="department"
-              rules={[
-                {
-                  required: true,
-                  message: "Enter department",
-                },
-              ]}
-            >
-              <Select>
-                <Select.Option value="sales">Sales</Select.Option>
-                <Select.Option value="marketing">Marketing</Select.Option>
-                <Select.Option value="engineering">Engineering</Select.Option>
-                <Select.Option value="human Resources">
-                  Human Resources
-                </Select.Option>
-                <Select.Option value="legal">Legal</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item style={{ textAlign: "center" }}>
-              <ConfigProvider
-                theme={{
-                  token: {
-                    colorBgContainer: "#e6ebf0",
+            <fieldset>
+              <legend style={{ borderBottom: "0", width: "auto" }}>
+                Address
+              </legend>
+              <Form.Item
+                label="Street"
+                name="street"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter the street",
                   },
-                }}
+                ]}
               >
-                <Button htmlType="submit">Save</Button>
-              </ConfigProvider>
-            </Form.Item>
-          </fieldset>
-        </Form>
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="City"
+                name="city"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter the city",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="State"
+                name="state"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter the state",
+                  },
+                ]}
+              >
+                {selectStates && <Select options={selectStates} />}
+              </Form.Item>
+              <Form.Item
+                label="Zip Code"
+                name="zipCode"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter zip code",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Department"
+                name="department"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter department",
+                  },
+                ]}
+              >
+                <Select>
+                  <Select.Option value="sales">Sales</Select.Option>
+                  <Select.Option value="marketing">Marketing</Select.Option>
+                  <Select.Option value="engineering">Engineering</Select.Option>
+                  <Select.Option value="human Resources">
+                    Human Resources
+                  </Select.Option>
+                  <Select.Option value="legal">Legal</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item style={{ textAlign: "center" }}>
+                <ConfigProvider
+                  theme={{
+                    token: {
+                      colorBgContainer: "#e6ebf0",
+                    },
+                  }}
+                >
+                  <Button htmlType="submit">Save</Button>
+                </ConfigProvider>
+              </Form.Item>
+            </fieldset>
+          </Form>
+        </div>
       </div>
       <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
         <p>Employee Created!</p>
