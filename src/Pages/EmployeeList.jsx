@@ -1,12 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Table } from "antd";
+import { Table, Input, Form } from "antd";
 import { selectEmployeesData } from "../selectors/selectors";
 
 const EmployeeList = () => {
+  const [SearchInput, setSearchInput] = useState("");
   const employeesData = useSelector(selectEmployeesData);
-  const employeesList = employeesData["employees"];
+  let employeesList = employeesData["employees"];
 
   const columns = [
     {
@@ -120,14 +122,38 @@ const EmployeeList = () => {
     },
   ];
 
+  const filterData = () => {
+    if (SearchInput === "") {
+      return employeesList;
+    }
+
+    employeesList = employeesList.filter((employee) => {
+      const r = columns.find((column) =>
+        employee[column.dataIndex].includes(SearchInput)
+      );
+
+      return r ? r : false;
+    });
+    return employeesList;
+  };
+
   return (
     <React.Fragment>
       <div id="employee-div" className="container">
-        <h1>Current Employees</h1>
+        <h1 style={{ textAlign: "center" }}>Current Employees</h1>
+        <div>
+          <Form style={{ display: "flex", justifyContent: "end" }}>
+            <Form.Item label="Search:">
+              <Input.Search size="small" onSearch={setSearchInput} allowClear />
+            </Form.Item>
+          </Form>
+        </div>
         {employeesList && (
-          <Table columns={columns} dataSource={employeesList}></Table>
+          <Table columns={columns} dataSource={filterData()}></Table>
         )}
-        <Link to="/home">Home</Link>
+        <Link to="/home" style={{ textAlign: "center" }}>
+          Home
+        </Link>
       </div>
     </React.Fragment>
   );
