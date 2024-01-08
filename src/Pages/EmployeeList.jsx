@@ -7,6 +7,7 @@ import { selectEmployeesData } from "../selectors/selectors";
 
 const EmployeeList = () => {
   const [searchInput, setSearchInput] = useState("");
+  const [searchSelect, setSearchSelect] = useState(10);
   const employeesData = useSelector(selectEmployeesData);
   let employeesList = employeesData["employees"];
 
@@ -14,6 +15,7 @@ const EmployeeList = () => {
     {
       title: "First Name",
       dataIndex: "firstName",
+      key: "firstName",
       sorter: (a, b) => {
         if (a.firstName < b.firstName) {
           return -1;
@@ -27,6 +29,7 @@ const EmployeeList = () => {
     {
       title: "Last Name",
       dataIndex: "lastName",
+      key: "lastName",
       sorter: (a, b) => {
         if (a.lastName < b.lastName) {
           return -1;
@@ -40,6 +43,7 @@ const EmployeeList = () => {
     {
       title: "Start Date",
       dataIndex: "startDate",
+      key: "startDate",
       sorter: (a, b) => {
         if (a.startDate < b.startDate) {
           return -1;
@@ -53,6 +57,7 @@ const EmployeeList = () => {
     {
       title: "Department",
       dataIndex: "department",
+      key: "department",
       sorter: (a, b) => {
         if (a.department < b.department) {
           return -1;
@@ -66,6 +71,7 @@ const EmployeeList = () => {
     {
       title: "Date of Birth",
       dataIndex: "dateOfBirth",
+      key: "dateOfBirth",
       sorter: (a, b) => {
         if (a.dateOfBirth < b.dateOfBirth) {
           return -1;
@@ -79,6 +85,7 @@ const EmployeeList = () => {
     {
       title: "Street",
       dataIndex: "street",
+      key: "street",
       sorter: (a, b) => {
         if (a.street < b.street) {
           return -1;
@@ -92,6 +99,7 @@ const EmployeeList = () => {
     {
       title: "City",
       dataIndex: "city",
+      key: "city",
       sorter: (a, b) => {
         if (a.city < b.city) {
           return -1;
@@ -105,6 +113,7 @@ const EmployeeList = () => {
     {
       title: "State",
       dataIndex: "state",
+      key: "state",
       sorter: (a, b) => {
         if (a.state < b.state) {
           return -1;
@@ -118,11 +127,12 @@ const EmployeeList = () => {
     {
       title: "Zip Code",
       dataIndex: "zipCode",
+      key: "zipCode",
       sorter: (a, b) => a.zipCode - b.zipCode,
     },
   ];
 
-  const employeesNumber = [
+  const dropDownEmployeesNumber = [
     {
       key: 1,
       value: 10,
@@ -157,7 +167,12 @@ const EmployeeList = () => {
 
       return r ? r : false;
     });
+
     return employeesList;
+  };
+
+  const numberEntriesToDisplay = (value) => {
+    setSearchSelect(value);
   };
 
   return (
@@ -166,21 +181,31 @@ const EmployeeList = () => {
         <h1 style={{ textAlign: "center" }}>Current Employees</h1>
         <div>
           <Form
+            layout="horizontal"
             initialValues={{
-              employeeNumber: employeesNumber[0].label,
+              employeeNumber: dropDownEmployeesNumber[0].label,
             }}
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <Form.Item label="Show" name="employeeNumber">
-              <Select options={employeesNumber}></Select>
+              <Select
+                options={dropDownEmployeesNumber}
+                onChange={numberEntriesToDisplay}
+              ></Select>
             </Form.Item>
-            <Form.Item label="Search:">
+            <Form.Item label="Search">
               <Input.Search size="small" onSearch={setSearchInput} allowClear />
             </Form.Item>
           </Form>
         </div>
         {employeesList && (
-          <Table columns={columns} dataSource={filterData()}></Table>
+          <Table
+            columns={columns}
+            dataSource={filterData()}
+            pagination={{
+              pageSize: searchSelect,
+            }}
+          ></Table>
         )}
         <Link to="/home" style={{ textAlign: "center" }}>
           Home
