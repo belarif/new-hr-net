@@ -11,7 +11,7 @@ import {
   ConfigProvider,
   Modal,
 } from "antd";
-import { standardizeDataStatesSelectField } from "../mappers/data";
+import { standardizeStatesData } from "../mappers/data";
 import { createEmployee } from "../features/employee";
 
 const CreateEmployee = () => {
@@ -21,7 +21,7 @@ const CreateEmployee = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setSelectStates(standardizeDataStatesSelectField);
+    setSelectStates(standardizeStatesData);
   }, []);
 
   const showModal = () => {

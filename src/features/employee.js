@@ -33,6 +33,11 @@ const employeeSlice = createSlice({
   },
 });
 
+/**
+ *
+ * @param {Object} values - The employee to create
+ * @param {Object} form
+ */
 export function createEmployee(values, form) {
   return async (dispatch) => {
     if (values) {
