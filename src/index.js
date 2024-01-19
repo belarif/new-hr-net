@@ -8,9 +8,9 @@ import {
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import CreateEmployee from "./Pages/CreateEmployee";
-import EmployeeList from "./Pages/EmployeeList";
-import Error from "./Pages/Error";
+import CreateEmployee from "./pages/CreateEmployee";
+import EmployeeList from "./pages/EmployeeList";
+import Error from "./pages/Error";
 import reportWebVitals from "./reportWebVitals";
 import "./css/main.css";
 
