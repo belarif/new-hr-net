@@ -37,6 +37,12 @@ const CreateEmployee = () => {
       ...formData,
       dateOfBirth: formData["dateOfBirth"].format("DD/MM/YYYY"),
       startDate: formData["startDate"].format("DD/MM/YYYY"),
+      firstName: formData["firstName"].toLowerCase(),
+      lastName: formData["lastName"].toLowerCase(),
+      department: formData["department"].toLowerCase(),
+      city: formData["city"].toLowerCase(),
+      state: formData["state"].toLowerCase(),
+      street: formData["street"].toLowerCase(),
     };
 
     dispatch(createEmployee(values, form));

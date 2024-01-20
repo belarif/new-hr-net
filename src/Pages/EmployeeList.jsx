@@ -163,7 +163,7 @@ const EmployeeList = () => {
 
     employeesList = employeesList.filter((employee) => {
       const r = columnsTable.find((column) =>
-        employee[column.dataIndex].includes(searchInput)
+        employee[column.dataIndex].includes(searchInput.toLowerCase())
       );
 
       return r ? r : false;
