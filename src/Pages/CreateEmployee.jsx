@@ -11,7 +11,7 @@ import {
   ConfigProvider,
   Modal,
 } from "antd";
-import { standardizeDataStatesSelectField } from "../mappers/data";
+import { standardizeStatesData } from "../mappers/data";
 import { createEmployee } from "../features/employee";
 
 const CreateEmployee = () => {
@@ -21,7 +21,7 @@ const CreateEmployee = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setSelectStates(standardizeDataStatesSelectField);
+    setSelectStates(standardizeStatesData);
   }, []);
 
   const showModal = () => {
@@ -37,6 +37,12 @@ const CreateEmployee = () => {
       ...formData,
       dateOfBirth: formData["dateOfBirth"].format("DD/MM/YYYY"),
       startDate: formData["startDate"].format("DD/MM/YYYY"),
+      firstName: formData["firstName"].toLowerCase(),
+      lastName: formData["lastName"].toLowerCase(),
+      department: formData["department"].toLowerCase(),
+      city: formData["city"].toLowerCase(),
+      state: formData["state"].toLowerCase(),
+      street: formData["street"].toLowerCase(),
     };
 
     dispatch(createEmployee(values, form));

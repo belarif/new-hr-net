@@ -11,7 +11,7 @@ const EmployeeList = () => {
   const employeesData = useSelector(selectEmployeesData);
   let employeesList = employeesData["employees"];
 
-  const columns = [
+  const columnsTable = [
     {
       title: "First Name",
       dataIndex: "firstName",
@@ -132,6 +132,7 @@ const EmployeeList = () => {
     },
   ];
 
+  // content drop down list of number of employees to display on table
   const dropDownEmployeesNumber = [
     {
       key: 1,
@@ -155,14 +156,14 @@ const EmployeeList = () => {
     },
   ];
 
-  const filterData = () => {
+  const filterEmployeeListToDisplay = () => {
     if (searchInput === "") {
       return employeesList;
     }
 
     employeesList = employeesList.filter((employee) => {
-      const r = columns.find((column) =>
-        employee[column.dataIndex].includes(searchInput)
+      const r = columnsTable.find((column) =>
+        employee[column.dataIndex].includes(searchInput.toLowerCase())
       );
 
       return r ? r : false;
@@ -171,7 +172,7 @@ const EmployeeList = () => {
     return employeesList;
   };
 
-  const numberEntriesToDisplay = (value) => {
+  const setNumberEmployeesToDisplay = (value) => {
     setSearchSelect(value);
   };
 
@@ -190,7 +191,7 @@ const EmployeeList = () => {
             <Form.Item label="Show" name="employeeNumber">
               <Select
                 options={dropDownEmployeesNumber}
-                onChange={numberEntriesToDisplay}
+                onChange={setNumberEmployeesToDisplay}
               ></Select>
             </Form.Item>
             <Form.Item label="Search">
@@ -200,8 +201,8 @@ const EmployeeList = () => {
         </div>
         {employeesList && (
           <Table
-            columns={columns}
-            dataSource={filterData()}
+            columns={columnsTable}
+            dataSource={filterEmployeeListToDisplay()}
             pagination={{
               pageSize: searchSelect,
             }}

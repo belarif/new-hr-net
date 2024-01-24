@@ -1,6 +1,6 @@
 import { states } from "../data/states";
 
-export const standardizeDataStatesSelectField = () => {
+export const standardizeStatesData = () => {
   return states.map((state) => ({
     ...state,
     label: state.name,
