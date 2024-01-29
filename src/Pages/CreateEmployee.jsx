@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { standardizeStatesData } from "../mappers/data";
 import { createEmployee } from "../features/employee";
+import "../css/createEmployee.css";
 
 const CreateEmployee = () => {
   const [selectStates, setSelectStates] = useState([]);
