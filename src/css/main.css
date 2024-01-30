@@ -1,15 +1,1 @@
-.container {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  width: 1024px;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/*# sourceMappingURL=main.css.map */
+.container{margin:auto;display:flex;flex-direction:column;width:1024px}/*# sourceMappingURL=main.css.map */
