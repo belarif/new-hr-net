@@ -2,15 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  ConfigProvider,
-  Modal,
-} from "antd";
+import { Button, Form, Input, DatePicker, Select, ConfigProvider } from "antd";
+import { Modal } from "modal-plugin-hocine";
 import { standardizeStatesData } from "../mappers/data";
 import { createEmployee } from "../features/employee";
 import "../css/createEmployee.css";
@@ -27,10 +20,6 @@ const CreateEmployee = () => {
 
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
 
   const onFinish = (formData) => {
@@ -202,9 +191,9 @@ const CreateEmployee = () => {
           </Form>
         </div>
       </div>
-      <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
-        <p>Employee Created!</p>
-      </Modal>
+      {isModalOpen && (
+        <Modal modalContent="Employee Created!" isOpen={isModalOpen}></Modal>
+      )}
     </React.Fragment>
   );
 };
