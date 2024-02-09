@@ -12,9 +12,17 @@ Depuis votre terminal, positionnez-vous sur le répertoire de votre projet puis 
 
 ### Lancement de l'application
 
-Executez la commande :
+1. Créer une version buildée :
 
-`npm start`
+   `npm run build`
+
+   1.1. lancer la version buildée
+
+   `serve -s build`
+
+2. Lancer la version en local :
+
+   `npm start`
 
 ### Visualisation de l'application
 
