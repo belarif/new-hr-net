@@ -11,6 +11,7 @@ import "../css/createEmployee.css";
 const CreateEmployee = () => {
   const [selectStates, setSelectStates] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalToolsOpen, setIsModalToolsOpen] = useState(true);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -42,6 +43,10 @@ const CreateEmployee = () => {
   return (
     <React.Fragment>
       <div className="container">
+        <Modal
+          modalContent="Technologies et outils utilisés : -Html -Css -Sass -React -React-persist -Redux -JavaScript -Ant design -VsCode"
+          isOpen={isModalToolsOpen}
+        ></Modal>
         <div className="content">
           <h1>HRnet</h1>
           <Link to="/employee-list">View Current Employees</Link>
